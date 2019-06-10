@@ -1,0 +1,4 @@
+// 这个文件使用sass-source-loader插件，将之全局引用
+@function rem($px) {
+  @return ($px / $vw_fontsize) * 1rem;
+}
