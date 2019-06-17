@@ -2,7 +2,6 @@
 <template>
   <div class="app-container">
     <fix-header v-model="show"></fix-header>
-
     <sport-list-item
       v-for="(item, index) in 20"
       :key="index"
@@ -14,6 +13,7 @@
 <script>
 import sportListItem from 'components/page-list-components/sport-list-item'
 import fixHeader from 'components/site-components/fix-header'
+import 'swiper/dist/css/swiper.css'
 // import { getGameList, test } from '@/api/index'
 import { mapMutations, mapGetters } from 'vuex'
 export default {
