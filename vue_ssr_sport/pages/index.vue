@@ -4,17 +4,10 @@
     <fix-header v-model="show"></fix-header>
 
     <sport-list-item
-      v-for="(item, index) in 3"
+      v-for="(item, index) in 20"
       :key="index"
       @click.native="handleClick(index)"
     ></sport-list-item>
-    <!-- <button @click="show= !show">点击出现header</button> -->
-    <nuxt-link to="/gamelist">跳转到gamelist</nuxt-link>
-    <ul>
-      <li v-for="(tab, index) in tabs" :key="index">
-        {{ tab.typeID }} - {{ tab.typeName }} - {{ tab.LV }}
-      </li>
-    </ul>
   </div>
 </template>
 

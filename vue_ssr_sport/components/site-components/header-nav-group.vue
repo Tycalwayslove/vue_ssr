@@ -1,45 +1,42 @@
 <template>
   <div class="nav-group">
     <ul>
-      <li>
-        <a href="#">NBA</a>
-      </li>
-      <li>
-        <a href="#">英超</a>
-      </li>
-      <li>
-        <a href="#">欧冠</a>
-      </li>
-      <li>
-        <a href="#">意甲</a>
-      </li>
-      <li>
-        <a href="#">欧联杯</a>
-      </li>
-      <li>
-        <a href="#">NFL</a>
-      </li>
-      <li>
-        <a href="#">NBA</a>
-      </li>
-      <li>
-        <a href="#">NCAA</a>
+      <li v-for="tab in tabs" :key="tab.typeID">
+        <a href="#">{{ tab.typeName }}</a>
       </li>
     </ul>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  name: 'NavGroup',
+  data() {
+    return {}
+  },
+  computed: mapGetters({
+    tabs: 'tabs/tabs'
+  })
+}
+</script>
 <style lang="scss" scoped>
 .nav-group {
   background-color: #f7f7f7;
   ul {
     padding: rem(5) 0;
     border-bottom: solid 1px #ddd;
-    display: flex;
-    flex-wrap: wrap;
+    &::after {
+      content: '.';
+      display: block;
+      height: 0;
+      clear: both;
+      overflow: hidden;
+    }
     li {
       position: relative;
-      display: inline-block;
-      width: 16%;
+      float: left;
+      width: 20%;
       line-height: rem(37);
       text-align: center;
       list-style-type: none;
