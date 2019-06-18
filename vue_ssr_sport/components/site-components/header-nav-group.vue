@@ -16,7 +16,7 @@ export default {
     return {}
   },
   computed: mapGetters({
-    tabs: 'tabs/tabs'
+    tabs: 'sport/tabs'
   })
 }
 </script>

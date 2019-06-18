@@ -15,7 +15,7 @@ import sportListItem from 'components/page-list-components/sport-list-item'
 import fixHeader from 'components/site-components/fix-header'
 import 'swiper/dist/css/swiper.css'
 // import { getGameList, test } from '@/api/index'
-import { mapMutations, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'GameList',
   components: { fixHeader, sportListItem },
@@ -27,24 +27,34 @@ export default {
     }
   },
   computed: mapGetters({
-    tabs: 'tabs/tabs'
+    tabs: 'sport/tabs'
   }),
-  asyncData({ app }) {
-    app.$axios.get('/api/GetTabs/GetReMen?FNum=3&SNum=4&TNum=5').then(res => {
-      console.log(res)
-    })
-  },
-  // fetch({ app }) {
-  //   app.$axios.get('/api/GetTabs/3').then(res => {
-  //     console.log(res)
-  //   })
+  // asyncData(context, app) {
+  //   console.log(context)
+  //   context.$axios
+  //     .get('/api/GetTabs/GetReMen?FNum=3&SNum=4&TNum=5')
+  //     .then(res => {
+  //       console.log(res)
+  //       // context.pushItem(res)
+  //     })
   // },
-  mounted() {
-    console.log(this)
+  fetch({ $axios, app }) {
+    const { fNum, sNum, tNum } = app.store.state.sport
+    return $axios
+      .get(`/api/GetTabs/GetReMen?FNum=${fNum}&SNum=${sNum}&TNum=${tNum}`)
+      .then(res => {
+        console.log(res)
+        app.store.commit('sport/pushTabList', res)
+      })
   },
+
+  mounted() {},
   methods: {
+    ...mapActions({
+      getTabList: 'sport/getTabList'
+    }),
     ...mapMutations({
-      push: 'tabs/push'
+      pushItem: 'sport/pushTabList'
     }),
     handleClick(num) {
       console.log(num)
@@ -53,8 +63,7 @@ export default {
         typeName: `名称${num}`,
         LV: 'Thrid'
       }
-      console.log(num)
-      this.$store.commit('tabs/push', { tabItem })
+      this.pushItem(tabItem)
     }
   }
 }
