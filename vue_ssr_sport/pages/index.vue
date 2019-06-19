@@ -2,11 +2,15 @@
 <template>
   <div class="app-container">
     <fix-header v-model="show"></fix-header>
-    <sport-list-item
-      v-for="(item, index) in 20"
-      :key="index"
-      @click.native="handleClick(index)"
-    ></sport-list-item>
+    <div class="wrapper">
+      <div class="content">
+        <sport-list-item
+          v-for="(item, index) in 20"
+          :key="index"
+          @click.native="handleClick(index)"
+        ></sport-list-item>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -16,6 +20,7 @@ import fixHeader from 'components/site-components/fix-header'
 import 'swiper/dist/css/swiper.css'
 // import { getGameList, test } from '@/api/index'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+
 export default {
   name: 'GameList',
   components: { fixHeader, sportListItem },
@@ -27,7 +32,9 @@ export default {
     }
   },
   computed: mapGetters({
-    tabs: 'sport/tabs'
+    tabs: 'sport/gettTbList',
+    sportList: 'sport/getSportList',
+    baseKey: 'sport/getBaseKey'
   }),
   // asyncData(context, app) {
   //   console.log(context)
@@ -48,7 +55,12 @@ export default {
       })
   },
 
-  mounted() {},
+  mounted() {
+    // eslint-disable-next-line
+    const BScroll = require('better-scroll').default
+    console.log()
+    this.scroll = new BScroll('.wrapper')
+  },
   methods: {
     ...mapActions({
       getTabList: 'sport/getTabList'
@@ -72,5 +84,8 @@ export default {
 <style lang="scss" scoped>
 .game {
   overflow: scroll;
+}
+.wrapper {
+  height: 100vh;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="nav-group">
     <ul>
-      <li v-for="tab in tabs" :key="tab.typeID">
+      <li v-for="tab in tabList" :key="tab.typeID">
         <a href="#">{{ tab.typeName }}</a>
       </li>
     </ul>
@@ -16,7 +16,7 @@ export default {
     return {}
   },
   computed: mapGetters({
-    tabs: 'sport/tabs'
+    tabList: 'sport/getTbList'
   })
 }
 </script>
