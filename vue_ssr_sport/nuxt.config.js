@@ -41,6 +41,10 @@ module.exports = {
       src: '~/plugins/swiper.js',
       ssr: false,
     },
+    {
+      src: '~/plugins/better-scroll.js',
+      ssr: false,
+    },
   ],
   /*
      ** Nuxt.js modules

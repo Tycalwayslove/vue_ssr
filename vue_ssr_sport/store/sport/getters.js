@@ -6,7 +6,6 @@ export default {
   // 获取 sportList 列表
   getSportList(state) {
     return state.tabList
-
   },
   // 获取typeId
   getTypeKey(state) {
