@@ -38,10 +38,6 @@ module.exports = {
       ssr: false,
     },
     {
-      src: '~/plugins/swiper.js',
-      ssr: false,
-    },
-    {
       src: '~/plugins/better-scroll.js',
       ssr: false,
     },
@@ -64,7 +60,6 @@ module.exports = {
     scss: [
       '@/assets/css/variable.scss',
       '@/assets/css/utils.scss',
-      'swiper/dist/css/swiper.css', // swiper
       // use underscore "_" & also file extension ".scss"
     ],
   },

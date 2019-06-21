@@ -31,13 +31,11 @@
 import sportListItem from 'components/page-list-components/sport-list-item'
 import fixHeader from 'components/site-components/fix-header'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import BScroll from '~/plugins/better-scroll'
-// import PullDown from 'better-scroll/default/pull-down'
-// BScroll.use(PullDown)
-const TIME_BOUNCE = 800
+// import BScroll from '~/plugins/better-scroll'
+// const TIME_BOUNCE = 800
 // const TIME_STOP = 600
-const THRESHOLD = 70
-const STOP = 56
+// const THRESHOLD = 70
+// const STOP = 56
 export default {
   name: 'GameList',
   components: { fixHeader, sportListItem },
@@ -75,7 +73,7 @@ export default {
     //   pullDownRefresh: true
     // })
     // console.log(this.scroll)
-    this._initBscroll()
+    // this._initBscroll()
   },
   methods: {
     ...mapActions({
@@ -116,21 +114,21 @@ export default {
       console.log(pos.y)
     },
     _initBscroll() {
-      this.bscroll = new BScroll(this.$refs.bsWrapper, {
-        scrollY: true,
-        click: true,
-        taps: true,
-        bonceTime: TIME_BOUNCE,
-        pullUpLoad: {
-          threshold: -70
-        },
-        pullDownRefresh: {
-          threshold: THRESHOLD,
-          stop: STOP
-        }
-      })
-      console.log(this.bscroll.on.prototype)
-      this.bscroll.on('pullingDown', this.pullingDownHandler)
+      // this.bscroll = new BScroll('.wrapper', {
+      //   scrollY: true,
+      //   click: true,
+      //   taps: true,
+      //   bonceTime: TIME_BOUNCE,
+      //   pullUpLoad: {
+      //     threshold: -70
+      //   },
+      //   pullDownRefresh: {
+      //     threshold: THRESHOLD,
+      //     stop: STOP
+      //   }
+      // })
+      // console.log(this.bscroll.on.prototype)
+      // this.bscroll.on('pullingDown', this.pullingDownHandler)
       // this.bscroll.on('scroll', this.scrollHandler)
     }
   }

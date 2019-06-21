@@ -17,7 +17,6 @@
 <script>
 import sportListItem from 'components/page-list-components/sport-list-item'
 import fixHeader from 'components/site-components/fix-header'
-import 'swiper/dist/css/swiper.css'
 // import { getGameList, test } from '@/api/index'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
@@ -57,9 +56,9 @@ export default {
 
   mounted() {
     // eslint-disable-next-line
-    const BScroll = require('better-scroll').default
-    console.log()
-    this.scroll = new BScroll('.wrapper')
+    // const BScroll = require('better-scroll').default
+    // console.log()
+    // this.scroll = new BScroll('.wrapper')
   },
   methods: {
     ...mapActions({
