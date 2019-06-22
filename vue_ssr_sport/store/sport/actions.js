@@ -1,3 +1,5 @@
+// import { prevDate, nextDate } from '@/utils/utils'
+
 export default {
   // 获取tab列表，并提交 pushTabList 事件，填充至 tabList
   getTabList({ commit, state }) {
@@ -12,5 +14,8 @@ export default {
       .catch(error => {
         console.log(error)
       })
+  },
+  changeParams({ commit, state }, type) {
+    commit('changeAheadValue', type)
   }
 }
