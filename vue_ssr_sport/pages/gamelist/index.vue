@@ -17,46 +17,50 @@
             </div>
           </div>
         </div>
-        <sport-list-item
-          v-for="(item, index) in 20"
-          :key="index"
-          @click.native="handleClick(index)"
-        ></sport-list-item>
+        <sport-list></sport-list>
+
+        <!-- 下拉事件的显示 -->
+        <div class="pullup-wrapper">
+          <div v-if="!isPullUpLoad" class="before-trigger">
+            <span class="pullup-txt">Pull up and load more</span>
+          </div>
+          <div v-else class="after-trigger">
+            <span class="pullup-txt">Loading...</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import sportListItem from 'components/page-list-components/sport-list-item'
+import sportList from 'components/page-list-components/sport-list'
 import fixHeader from 'components/site-components/fix-header'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-// import BScroll from '~/plugins/better-scroll'
-// const TIME_BOUNCE = 800
-// const TIME_STOP = 600
-// const THRESHOLD = 70
-// const STOP = 56
+const TIME_BOUNCE = 800
+const TIME_STOP = 600
+const THRESHOLD = 70
+const STOP = 56
 export default {
   name: 'GameList',
-  components: { fixHeader, sportListItem },
+  components: { fixHeader, sportList },
 
   data() {
     return {
       data: {},
       show: false,
       beforePullDown: true,
-      isPullingDown: false
+      isPullingDown: false,
+      isPullUpLoad: false
     }
   },
   computed: mapGetters({
-    tabs: 'sport/gettTbList',
-    sportList: 'sport/getSportList',
-    baseKey: 'sport/getBaseKey'
+    baseKey: 'sport/getBaseKey', // 对象
+    sportListParams: 'sport/getSportListParams' // 获取渲染赛事传参 | type: Object
   }),
   fetch({ $axios, app }) {
-    const { fNum, sNum, tNum } = app.store.state.sport
     return $axios
-      .get(`/api/GetTabs/GetReMen?FNum=${fNum}&SNum=${sNum}&TNum=${tNum}`)
+      .get(`/api/GetTabs/GetTypeClass?typeLevelName=firsttype&typeId=0`)
       .then(res => {
         console.log(res)
         app.store.commit('sport/pushTabList', res)
@@ -64,26 +68,20 @@ export default {
   },
 
   mounted() {
-    // const BScroll = require('better-scroll').default
-    // BScroll.use(Pulldown)
-    // const PullDown = require('better-scroll').default.pull - down
-    // let options = {
-    // }
-    // this.scroll = new BScroll('.wrapper', {
-    //   pullDownRefresh: true
-    // })
-    // console.log(this.scroll)
-    // this._initBscroll()
+    // better-scroll 初始化
+    this._initBscroll()
+    this.requestData()
   },
   methods: {
     ...mapActions({
       getTabList: 'sport/getTabList'
     }),
     ...mapMutations({
-      pushItem: 'sport/pushTabList'
+      pushItem: 'sport/pushTabList',
+      pushSportList: 'sport/pushSportList', // 填充sportList
+      changeAheadValue: 'sport/changeAheadValue' // 改变Ahead 值
     }),
     handleClick(num) {
-      console.log(num)
       // const tabItem = {
       //   typeID: num,
       //   typeName: `名称${num}`,
@@ -91,19 +89,47 @@ export default {
       // }
       // this.pushItem(tabItem)
     },
-    // 下拉刷新之后
-    finishPullDown() {
-      console.log('刷新完成')
-    },
     // 请求数据
-    async requestData() {
-      await setTimeout(() => {
-        console.log('请求数据')
-      }, 3000)
+    requestData() {
+      // const params = this.sportListParams // 此处为store 中的数据
+      console.log(this.sportListParams)
+      this.$axios
+        .get('/api/GetPlayData/GetPalyForType', {
+          params: this.sportListParams
+        })
+        .then(res => {
+          console.log(res)
+          this.pushSportList(res)
+        })
+    },
+    // 下拉刷新之后
+    async finishPullDown() {
+      console.log('刷新完成')
+      const stopTime = TIME_STOP
+      await new Promise(resolve => {
+        setTimeout(() => {
+          this.bscroll.finishPullDown()
+          resolve()
+        }, stopTime)
+      })
+      setTimeout(() => {
+        this.beforePullDown = true
+        this.bscroll.refresh()
+      }, TIME_BOUNCE)
+    },
+    // 下拉动作
+    async pullingUpHandler() {
+      this.isPullUpLoad = true
+      this.changeAheadValue('BUTTOM') // 改变ahader的值
+      console.log('开始下拉')
+      await this.requestData()
+      this.bscroll.finishPullUp()
+      this.isPullUpLoad = false
     },
     // 监听的下拉事件
     async pullingDownHandler() {
-      console.log('pullingDown')
+      console.log('改变aheadera')
+      this.changeAheadValue('TOP') // 改变ahader的值
       this.beforePullDown = false
       this.isPullingDown = true
       await this.requestData()
@@ -111,25 +137,31 @@ export default {
       this.finishPullDown()
     },
     scrollHandler(pos) {
-      console.log(pos.y)
+      // console.log(pos.y)
     },
     _initBscroll() {
-      // this.bscroll = new BScroll('.wrapper', {
-      //   scrollY: true,
-      //   click: true,
-      //   taps: true,
-      //   bonceTime: TIME_BOUNCE,
-      //   pullUpLoad: {
-      //     threshold: -70
-      //   },
-      //   pullDownRefresh: {
-      //     threshold: THRESHOLD,
-      //     stop: STOP
-      //   }
-      // })
+      const BScroll = require('better-scroll').default
+      this.bscroll = new BScroll('.wrapper', {
+        scrollY: true,
+        click: true,
+        taps: true,
+        probeType: 3,
+        bonceTime: TIME_BOUNCE,
+        pullUpLoad: {
+          threshold: -70
+        },
+        pullDownRefresh: {
+          threshold: THRESHOLD,
+          stop: STOP
+        }
+      })
       // console.log(this.bscroll.on.prototype)
-      // this.bscroll.on('pullingDown', this.pullingDownHandler)
-      // this.bscroll.on('scroll', this.scrollHandler)
+      // 上拉事件
+      this.bscroll.on('pullingDown', this.pullingDownHandler)
+      // 滚动事件
+      this.bscroll.on('scroll', this.scrollHandler)
+      // 下拉事件
+      this.bscroll.on('pullingUp', this.pullingUpHandler)
     }
   }
 }

@@ -16,7 +16,7 @@ export default {
     return {}
   },
   computed: mapGetters({
-    tabList: 'sport/getTbList'
+    tabList: 'sport/getTabList'
   })
 }
 </script>

@@ -15,9 +15,8 @@
 </template>
 
 <script>
-import sportListItem from 'components/page-list-components/sport-list-item'
+import sportListItem from 'components/page-list-components/sport-list'
 import fixHeader from 'components/site-components/fix-header'
-// import { getGameList, test } from '@/api/index'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 export default {
@@ -55,9 +54,6 @@ export default {
   },
 
   mounted() {
-    // eslint-disable-next-line
-    // const BScroll = require('better-scroll').default
-    // console.log()
     // this.scroll = new BScroll('.wrapper')
   },
   methods: {

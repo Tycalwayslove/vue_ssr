@@ -1,11 +1,11 @@
 export default {
   // 获取tabs 列表
-  getTbList(state) {
+  getTabList(state) {
     return state.tabList
   },
   // 获取 sportList 列表
   getSportList(state) {
-    return state.tabList
+    return state.sportList
   },
   // 获取typeId
   getTypeKey(state) {
@@ -15,5 +15,29 @@ export default {
   getBaseKey(state) {
     const { pageNum, pageSize } = state
     return { pageNum, pageSize }
+  },
+  // 获取请求列表的参数
+  getSportListParams(state) {
+    console.log(state)
+    const {
+      pageNum,
+      pageSize,
+      firstClassId,
+      secondClassId,
+      thirdClassId,
+      playDate,
+      AheadOrRear
+    } = state
+    console.log(pageNum)
+
+    return {
+      pageNum,
+      pageSize,
+      firstClassId,
+      secondClassId,
+      thirdClassId,
+      playDate,
+      AheadOrRear
+    }
   }
 }

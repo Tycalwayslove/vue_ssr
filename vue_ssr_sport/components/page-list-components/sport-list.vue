@@ -2,21 +2,33 @@
   <div class="sport-list">
     <div class="sport-list-el">
       <ul class="game-list">
-        <li class="group-info">05-06</li>
-        <li class="game-item px-bottom">
-          <a class="detail-url">
+        <li class="group-info">{{ sportList.Date | DateFormat }}</li>
+        <li
+          v-for="play in sportList.List"
+          :key="play.playId"
+          class="game-item px-bottom"
+        >
+          <a class="detail-url" :href="play.liveAddress1">
             <div class="game-desc">英超第三轮</div>
             <div class="game-info">
               <div class="left team-box">
-                <img src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png" alt>
-                <h3>埃弗顿</h3>
+                <img
+                  src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png"
+                  alt
+                />
+                <h3>{{ play.teamAName }}</h3>
               </div>
               <div class="right team-box">
-                <img src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png" alt>
-                <h3>埃弗顿</h3>
+                <img
+                  src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png"
+                  alt
+                />
+                <h3>{{ play.teamBName }}</h3>
               </div>
               <div class="game-status">
-                <div class="goals">2:0</div>
+                <div class="goals">
+                  {{ play.teamAPoint }}:{{ play.teamBPoint }}
+                </div>
                 <div class="game-icon end">
                   <i></i>
                   集锦
@@ -30,13 +42,32 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+import moment from 'moment'
+
 export default {
-  name: 'SportListItem',
+  name: 'SportList',
+  components: {},
+  filters: {
+    DateFormat(value) {
+      const date = moment(value).format('YYYY-MM-DD')
+
+      // const mouth = moment(date)
+      //   .mouth()
+      //   .format('YYYY-MM-DD')
+      // console.log(mouth)
+      // return `${mouth}月`
+      return date
+    }
+  },
   data() {
     return {
       data: null
     }
-  }
+  },
+  computed: mapGetters({
+    sportList: 'sport/getSportList' // 赛事列表
+  })
 }
 </script>
 
