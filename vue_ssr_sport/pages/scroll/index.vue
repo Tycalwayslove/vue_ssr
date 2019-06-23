@@ -1,7 +1,10 @@
 <template>
-  <div>
+  <div class="app-container">
+    <fix-header id="header" ref="header" v-model="show"></fix-header>
+
     <scroll
       ref="scroll"
+      class="scroll-wrapper"
       :data="list"
       :listen-scroll-end="true"
       :pull-up-load="pullUpLoad"
@@ -9,7 +12,8 @@
       @pullingUp="onPullingUp"
       @pullingDown="onPullingDown"
     >
-      <sport-list :list="list"></sport-list>
+      <sport-list :list="list" :style="{ paddingTop: paddingTopValue }">
+      </sport-list>
     </scroll>
   </div>
 </template>
@@ -19,33 +23,63 @@ import Scroll from '@/components/site-components/Scroll.vue'
 import sportList from 'components/page-list-components/sport-list'
 import { mapGetters, mapActions } from 'vuex'
 import moment from 'moment'
+import fixHeader from 'components/site-components/fix-header'
 // import { nextDate } from '@/utils/utils'
 
 export default {
   components: {
     Scroll,
-    sportList
+    sportList,
+    fixHeader
   },
   data() {
     return {
+      show: true,
       header: 'Better-scroll',
       pullUpLoad: {
         threshold: 10,
         txt: { more: '正在加载以后的赛事中', noMore: '暂无更多数据' }
       },
       pullDownRefresh: {
-        threshold: 10,
+        threshold: 60,
         stop: 60,
         txt: { more: '', noMore: '暂无更多数据' }
       },
       page: 0,
-      list: {}
+      list: {},
+      top: null
     }
   },
-  computed: mapGetters({
-    sportListParams: 'sport/getSportListParams' // 获取渲染赛事传参 | type: Object
-  }),
+  computed: {
+    ...mapGetters({
+      sportListParams: 'sport/getSportListParams' // 获取渲染赛事传参 | type: Object
+    }),
+    paddingTopValue() {
+      if (this.show) {
+        return this.top
+      } else {
+        return '0px'
+      }
+    }
+  },
+  fetch({ $axios, app }) {
+    return $axios
+      .get(`/api/GetTabs/GetReMen?fNum=3&sNum=4&tNum=5`)
+      .then(res => {
+        console.log(res)
+        app.store.commit('sport/pushTabList', res)
+      })
+  },
+
   mounted() {
+    this.$nextTick(() => {
+      console.log(this.$refs.header.$el.offsetHeight)
+      // const h =
+      //   document.documentElement.clientHeight || document.body.clientHeight
+      const height = this.$refs.header.$el.offsetHeight
+      console.log(this.$refs.header.$el.offsetHeight)
+      this.top = height + 'px'
+    })
     this.requestData()
   },
   methods: {
@@ -53,6 +87,7 @@ export default {
       changeParams: 'sport/changeParams',
       handleTouchBehavior: 'sport/handleTouchBehavior'
     }),
+
     onPullingUp() {
       console.log('下拉')
       this.handleTouchBehavior({ type: 'buttom' })
@@ -118,16 +153,17 @@ export default {
             } else {
               console.log(data)
               // 遍历返回的data, 如果data对象中的key 相同，则合并该属性的值
-              for (const item in data) {
-                if (this.list.hasOwnProperty(item)) {
-                  this.list[item].unshift(data[item])
-                } else {
-                  // this.$set(this.list, item, data[item])
-                  // this.list.unshift(data)
-                  this.$set(this.list, item, data[item])
-                }
-              }
-              console.log(this.list)
+              // for (const item in data) {
+              //   if (this.list.hasOwnProperty(item)) {
+              //     this.list[item].unshift(data[item])
+              //   } else {
+              //     // this.$set(this.list, item, data[item])
+              //     // this.list.unshift(data)
+              //     this.$set(this.list, item, data[item])
+              //   }
+              // }
+              // console.log(this.list)
+              this.list = data
             }
             // this.list = this.list.concat(res.List)
             // this.list.push(res)
@@ -143,4 +179,12 @@ export default {
 }
 </script>
 
-<style lang="scss" rel="stylesheet/scss" scope></style>
+<style lang="scss" rel="stylesheet/scss" scope>
+.app-container {
+  width: 100vw;
+  height: 100vh;
+}
+.scroll-wrapper {
+  // padding-top: rem(127);
+}
+</style>
