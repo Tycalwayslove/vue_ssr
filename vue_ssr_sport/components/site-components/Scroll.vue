@@ -237,7 +237,6 @@ export default {
         console.log(this.scroll.maxScrollY)
         this.pullDownDirty = dirty
         this.refresh()
-        // this.scroll.scrollTo(this.scroll.maxScrollY)
       } else {
         this.refresh()
       }
