@@ -18,7 +18,6 @@ export default {
   },
   // 获取请求列表的参数
   getSportListParams(state) {
-    console.log(state)
     const {
       pageNum,
       pageSize,
@@ -26,9 +25,9 @@ export default {
       secondClassId,
       thirdClassId,
       playDate,
-      AheadOrRear
+      AheadOrRear,
+      todaysIsOver
     } = state
-    console.log(pageNum)
 
     return {
       pageNum,
@@ -37,7 +36,8 @@ export default {
       secondClassId,
       thirdClassId,
       playDate,
-      AheadOrRear
+      AheadOrRear,
+      todaysIsOver
     }
   }
 }

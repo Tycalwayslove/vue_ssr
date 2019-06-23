@@ -1,41 +1,28 @@
 <template>
-  <div class="sport-list">
-    <div class="sport-list-el">
-      <ul class="game-list">
-        <li class="group-info">{{ sportListParams.playDate }}</li>
-        <li v-for="play in list" :key="play.playId" class="game-item px-bottom">
-          <a class="detail-url" :href="play.liveAddress1">
-            <div class="game-desc">英超第三轮</div>
-            <div class="game-info">
-              <div class="left team-box">
-                <img
-                  src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png"
-                  alt
-                />
-                <h3>{{ play.teamAName }}</h3>
-              </div>
-              <div class="right team-box">
-                <img
-                  src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png"
-                  alt
-                />
-                <h3>{{ play.teamBName }}</h3>
-              </div>
-              <div class="game-status">
-                <div class="goals">
-                  {{ play.teamAPoint }}:{{ play.teamBPoint }}
-                </div>
-                <div class="game-icon end">
-                  <i></i>
-                  集锦
-                </div>
-              </div>
-            </div>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <li class="game-item px-bottom">
+    <a class="detail-url" :href="sportItem.liveAddress1">
+      <div class="game-desc">英超第三轮</div>
+      <div class="game-info">
+        <div class="left team-box">
+          <img src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png" alt />
+          <h3>{{ sportItem.teamAName }}</h3>
+        </div>
+        <div class="right team-box">
+          <img src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png" alt />
+          <h3>{{ sportItem.teamBName }}</h3>
+        </div>
+        <div class="game-status">
+          <div class="goals">
+            {{ sportItem.teamAPoint }}:{{ sportItem.teamBPoint }}
+          </div>
+          <div class="game-icon end">
+            <i></i>
+            集锦
+          </div>
+        </div>
+      </div>
+    </a>
+  </li>
 </template>
 <script>
 import { mapGetters } from 'vuex'
@@ -57,8 +44,8 @@ export default {
     }
   },
   props: {
-    list: {
-      type: Array
+    sportItem: {
+      type: Object
     }
   },
   data() {

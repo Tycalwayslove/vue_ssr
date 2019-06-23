@@ -15,7 +15,8 @@ export default () => ({
   secondClassId: 0, // 二级获取个数
   thirdClassId: 0, // 三级获取个数
   playDate: getNowDate(), // 当前日期
-  AheadOrRear: 0,
+  AheadOrRear: 0, // 2 为上拉动作 1 为下拉动作 默认为0
+  dataCount: null, // 获取数据返回的数据数量
   // 获取sportList必须变量
   typeId: null // 该tab 的typeId
 })

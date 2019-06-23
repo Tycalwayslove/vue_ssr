@@ -30,7 +30,7 @@ export default {
     }
   },
   computed: mapGetters({
-    tabs: 'sport/gettTbList',
+    tabs: 'sport/gettTabList',
     sportList: 'sport/getSportList',
     baseKey: 'sport/getBaseKey'
   }),

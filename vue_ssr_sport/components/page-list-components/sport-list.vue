@@ -1,14 +1,14 @@
 <template>
   <div class="sport-list">
     <div class="sport-list-el">
-      <ul class="game-list">
-        <li class="group-info">{{ sportList.Date | DateFormat }}</li>
+      <ul v-for="(key, value, index) in list" :key="index" class="game-list">
+        <li class="group-info">{{ value | DateFormat }}</li>
         <li
-          v-for="play in sportList.List"
-          :key="play.playId"
+          v-for="sportItem in key"
+          :Key="sportItem.playId"
           class="game-item px-bottom"
         >
-          <a class="detail-url" :href="play.liveAddress1">
+          <a class="detail-url" :href="sportItem.liveAddress1">
             <div class="game-desc">英超第三轮</div>
             <div class="game-info">
               <div class="left team-box">
@@ -16,18 +16,18 @@
                   src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png"
                   alt
                 />
-                <h3>{{ play.teamAName }}</h3>
+                <h3>{{ sportItem.teamAName }}</h3>
               </div>
               <div class="right team-box">
                 <img
                   src="http://mat1.gtimg.com/sports/logo/yingchao/afd.png"
                   alt
                 />
-                <h3>{{ play.teamBName }}</h3>
+                <h3>{{ sportItem.teamBName }}</h3>
               </div>
               <div class="game-status">
                 <div class="goals">
-                  {{ play.teamAPoint }}:{{ play.teamBPoint }}
+                  {{ sportItem.teamAPoint }}:{{ sportItem.teamBPoint }}
                 </div>
                 <div class="game-icon end">
                   <i></i>
@@ -43,21 +43,21 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-import moment from 'moment'
+// import sportListItem from './sport-list-item'
 
 export default {
   name: 'SportList',
+  // sportListItem
   components: {},
   filters: {
     DateFormat(value) {
-      const date = moment(value).format('YYYY-MM-DD')
-
-      // const mouth = moment(date)
-      //   .mouth()
-      //   .format('YYYY-MM-DD')
-      // console.log(mouth)
-      // return `${mouth}月`
-      return date
+      const arr = value.split('-')
+      return `${arr[0]}年${arr[1]}月${arr[2]}日`
+    }
+  },
+  props: {
+    list: {
+      type: Object
     }
   },
   data() {
@@ -66,7 +66,8 @@ export default {
     }
   },
   computed: mapGetters({
-    sportList: 'sport/getSportList' // 赛事列表
+    sportList: 'sport/getSportList', // 赛事列表
+    sportListParams: 'sport/getSportListParams'
   })
 }
 </script>

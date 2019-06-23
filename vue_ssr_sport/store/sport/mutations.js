@@ -25,5 +25,13 @@ export default {
       console.log('上拉动作')
       console.log(state.playDate)
     }
+  },
+
+  // 改变params 的值
+  changeParams(state, actions) {
+    // console.log(actions)
+    if (state.hasOwnProperty(actions.name)) {
+      state[actions.name] = actions.value
+    }
   }
 }

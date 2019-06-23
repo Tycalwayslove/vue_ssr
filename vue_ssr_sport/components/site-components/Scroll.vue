@@ -39,9 +39,9 @@ export default {
   },
   props: {
     data: {
-      type: Array,
+      type: Object,
       default: function() {
-        return []
+        return {}
       }
     },
     /**
@@ -159,10 +159,16 @@ export default {
     }
   },
   watch: {
-    data() {
-      setTimeout(() => {
-        this.forceUpdate(true)
-      }, this.refreshDelay)
+    data:{
+      // setTimeout(() => {
+      //   this.forceUpdate(true)
+      // }, this.refreshDelay)
+      deep:true,
+      handler: function(newVal){
+        console.log('数据有变化')
+        this.data = newVal;
+        this.forceUpdate();
+      }
     }
   },
   mounted() {
