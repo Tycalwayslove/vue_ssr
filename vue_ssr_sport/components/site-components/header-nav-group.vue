@@ -1,7 +1,11 @@
 <template>
   <div class="nav-group">
     <ul>
-      <li v-for="tab in tabList" :key="tab.typeID">
+      <li
+        v-for="tab in tabList"
+        :key="tab.typeID"
+        @click="handleTabClick(tab.typeID)"
+      >
         <a href="#">{{ tab.typeName }}</a>
       </li>
     </ul>
@@ -9,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'NavGroup',
   data() {
@@ -17,7 +21,13 @@ export default {
   },
   computed: mapGetters({
     tabList: 'sport/getTabList'
-  })
+  }),
+  methods: {
+    ...mapActions({
+      changeParams: 'sport/changeParams'
+    }),
+    handleTabClick(id) {}
+  }
 }
 </script>
 <style lang="scss" scoped>
