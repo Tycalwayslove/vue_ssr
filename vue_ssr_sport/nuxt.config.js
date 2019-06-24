@@ -37,7 +37,7 @@ module.exports = {
             ssr: false,
         },
         // {
-        //     src: '~/plugins/better-scroll.js',
+        //     src: '~/plugins/moment.js',
         //     ssr: false,
         // },
     ],

@@ -1,5 +1,4 @@
 import moment from 'moment'
-
 export function getNowDate() {
   const formatDate = moment().format('YYYY-MM-DD')
   console.log(formatDate)

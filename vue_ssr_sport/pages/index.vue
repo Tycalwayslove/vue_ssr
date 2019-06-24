@@ -22,7 +22,7 @@
 import Scroll from '@/components/site-components/Scroll.vue'
 import sportList from 'components/page-list-components/sport-list'
 import { mapGetters, mapActions } from 'vuex'
-import moment from 'moment'
+import moment from '~/plugins/moment'
 import fixHeader from 'components/site-components/fix-header'
 // import { nextDate } from '@/utils/utils'
 
