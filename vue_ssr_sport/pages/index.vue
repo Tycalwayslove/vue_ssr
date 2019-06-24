@@ -182,8 +182,8 @@ export default {
 
 <style lang="scss" rel="stylesheet/scss" scope>
 .app-container {
-  width: 100vw;
   height: 100vh;
+  position:relative;
 }
 .scroll-wrapper {
   width: rem(375);
