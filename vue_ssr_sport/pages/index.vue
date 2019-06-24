@@ -173,6 +173,7 @@ export default {
           }
           const paramsCount = { name: 'dataCount', value: res.Count }
           this.changeParams(paramsCount)
+          // this.changeParams({ name: 'playDate', value: res.Count })
         })
     }
   }
@@ -185,6 +186,6 @@ export default {
   height: 100vh;
 }
 .scroll-wrapper {
-  // padding-top: rem(127);
+  width: rem(375);
 }
 </style>

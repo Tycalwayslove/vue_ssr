@@ -159,15 +159,15 @@ export default {
     }
   },
   watch: {
-    data:{
+    data: {
       // setTimeout(() => {
       //   this.forceUpdate(true)
       // }, this.refreshDelay)
-      deep:true,
-      handler: function(newVal){
+      deep: true,
+      handler: function(newVal) {
         console.log('数据有变化')
-        this.data = newVal;
-        this.forceUpdate();
+        this.data = newVal
+        this.forceUpdate()
       }
     }
   },
@@ -266,6 +266,7 @@ export default {
   bottom: 0;
   overflow: hidden;
   background: #fff;
+  // width: rem(375);
 }
 .pullup-wrapper,
 .pullup-wrapper {

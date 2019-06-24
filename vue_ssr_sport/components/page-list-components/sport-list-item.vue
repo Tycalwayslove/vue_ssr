@@ -76,7 +76,7 @@ export default {
   & a {
     display: block;
     width: 100%;
-    height: rem(127);
+    height: rem(128);
     text-decoration: none;
   }
   .game-desc {
@@ -85,10 +85,12 @@ export default {
     line-height: rem(17);
     font-size: rem(14);
     color: #9e9e9e;
+    box-sizing:border-box;
   }
   .game-info {
     width: 100%;
     text-align: center;
+    box-sizing:border-box;
 
     height: rem(97);
     .team-box {
