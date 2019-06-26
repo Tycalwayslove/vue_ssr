@@ -57,7 +57,10 @@ export default {
   },
   props: {
     list: {
-      type: Object
+      type: Object,
+      default: () => {
+        return {}
+      }
     }
   },
   data() {

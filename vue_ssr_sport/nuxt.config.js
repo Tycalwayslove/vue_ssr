@@ -71,15 +71,15 @@ module.exports = {
         prefix: '/api',
         credentials: true,
     },
-    proxy: {
-        '/api/': {
-            target: 'http://3.1.85.182:8080',
-            changeOrigin: true,
-            pathRewrite: {
-                '^/api': '',
-            },
-        },
-    },
+    // proxy: {
+    //     '/api/': {
+    //         target: 'http://3.1.85.182:8080',
+    //         changeOrigin: true,
+    //         pathRewrite: {
+    //             '^/api': '',
+    //         },
+    //     },
+    // },
     /*
      ** Build configuration
      */
