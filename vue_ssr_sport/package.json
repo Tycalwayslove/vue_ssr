@@ -7,9 +7,9 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
+    "dev": "cross-env NODE_ENV=development nodemon ./nuxt/index.js --watch server",
     "build": "nuxt build && npm start",
-    "start": "cross-env NODE_ENV=production node server/index.js",
+    "start": "nuxt start",
     "generate": "nuxt generate"
   },
   "dependencies": {
@@ -21,6 +21,12 @@
     "moment": "^2.24.0",
     "nuxt": "^2.0.0",
     "pm2": "^3.5.1"
+  },
+  "config":{
+    "nuxt":{
+      "host":"0.0.0.0",
+      "port":8010
+    }
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",

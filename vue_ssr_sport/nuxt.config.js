@@ -3,7 +3,7 @@ module.exports = {
   mode: 'spa',
   server: {
     host: 'localhost',
-    port: 8080
+    port: 8010
   },
   /*
    ** Headers of the page
