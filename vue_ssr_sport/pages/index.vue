@@ -126,54 +126,57 @@ export default {
           params: this.sportListParams
         })
         .then(res => {
-          const data = this.parseData(res) // 更改数据格式
-          const arr = Object.getOwnPropertyNames(this.list) // 判断this.list 是否为空
-          console.log(this.sportListParams.AheadOrRear)
-          if (this.sportListParams.AheadOrRear === 1) {
-            console.log(this.list)
-            if (arr.length === 0) {
-              // 数据为空时直接赋值给this.list
-              this.$set(this.list, data)
-            } else {
-              console.log(data)
-              // 遍历返回的data, 如果data对象中的key 相同，则合并该属性的值
-              for (const item in data) {
-                if (this.list.hasOwnProperty(item)) {
-                  this.list[item].push(data[item])
-                } else {
-                  this.$set(this.list, item, data[item])
-                }
-              }
+          console.log(res)
+          if (res.Count !== 0) {
+            const data = this.parseData(res) // 更改数据格式
+            console.log(data)
+            const arr = Object.getOwnPropertyNames(this.list) // 判断this.list 是否为空
+            console.log(this.sportListParams.AheadOrRear)
+            if (this.sportListParams.AheadOrRear === 1) {
               console.log(this.list)
-            }
-          } else if (this.sportListParams.AheadOrRear === 2) {
-            if (arr.length === 0) {
-              // 数据为空时直接赋值给this.list
-              this.$set(this.list, data)
-            } else {
-              console.log(data)
-              // 遍历返回的data, 如果data对象中的key 相同，则合并该属性的值
-              // for (const item in data) {
-              //   if (this.list.hasOwnProperty(item)) {
-              //     this.list[item].unshift(data[item])
-              //   } else {
-              //     // this.$set(this.list, item, data[item])
-              //     // this.list.unshift(data)
-              //     this.$set(this.list, item, data[item])
-              //   }
-              // }
+              if (arr.length === 0) {
+                // 数据为空时直接赋值给this.list
+                this.$set(this.list, data)
+              } else {
+                console.log(data)
+                // 遍历返回的data, 如果data对象中的key 相同，则合并该属性的值
+                for (const item in data) {
+                  if (this.list.hasOwnProperty(item)) {
+                    this.list[item].push(data[item])
+                  } else {
+                    this.$set(this.list, item, data[item])
+                  }
+                }
+                console.log(this.list)
+              }
+            } else if (this.sportListParams.AheadOrRear === 2) {
+              if (arr.length === 0) {
+                // 数据为空时直接赋值给this.list
+                this.$set(this.list, data)
+              } else {
+                console.log(data)
+                // 遍历返回的data, 如果data对象中的key 相同，则合并该属性的值
+                // for (const item in data) {
+                //   if (this.list.hasOwnProperty(item)) {
+                //     this.list[item].unshift(data[item])
+                //   } else {
+                //     // this.$set(this.list, item, data[item])
+                //     // this.list.unshift(data)
+                //     this.$set(this.list, item, data[item])
+                //   }
+                // }
+                // console.log(this.list)
+                this.list = data
+              }
+              // this.list = this.list.concat(res.List)
+              // this.list.push(res)
               // console.log(this.list)
+            } else {
               this.list = data
             }
-            // this.list = this.list.concat(res.List)
-            // this.list.push(res)
-            // console.log(this.list)
-          } else {
-            this.list = data
+            const paramsCount = { name: 'dataCount', value: res.Count }
+            this.changeParams(paramsCount)
           }
-          const paramsCount = { name: 'dataCount', value: res.Count }
-          this.changeParams(paramsCount)
-          // this.changeParams({ name: 'playDate', value: res.Count })
         })
     }
   }

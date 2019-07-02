@@ -3,7 +3,7 @@ module.exports = {
   mode: 'spa',
   server: {
     host: 'localhost',
-    port: 8010
+    port: 8080
   },
   /*
    ** Headers of the page
@@ -45,12 +45,12 @@ module.exports = {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  // axios: {
-  //   baseURL: process.env.NODE_ENV == 'production'? "http://3.1.85.182:8080":"http://localhost:8080"
-  // },
+  axios: {
+    baseURL: process.env.NODE_ENV == 'production'? "http://120.78.74.49:8080":"http://localhost:8080"
+  },
   proxy: {
     '/api': {
-      target: 'http://3.1.85.182:8080/api',
+      target: 'http://120.78.74.49:8080/api',
       changeOrigin: true,
       pathRewrite: {
         '^/api': ''
