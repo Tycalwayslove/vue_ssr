@@ -1,6 +1,5 @@
 // import * as axios from 'axios'
 export default function({ app }) {
-  console.log(app)
   const axios = app.$axios
   // 基本配置
   // axios.defaults.baseURL = 'http://3.1.85.182:8080'
@@ -10,14 +9,14 @@ export default function({ app }) {
 
   // 请求回调
   axios.onRequest(config => {
-    console.log(config)
+    // console.log(config)
   })
 
   // 返回回调
   axios.onResponse(res => {
-    console.log(res)
+    // console.log(res)
     if (res.status === 200) {
-      return res.data.Data
+      return res.data
     }
   })
 

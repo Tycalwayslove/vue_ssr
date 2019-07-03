@@ -11,10 +11,9 @@ export default {
   getTypeKey(state) {
     return state.typeId
   },
-  // 获取基础常量
-  getBaseKey(state) {
-    const { pageNum, pageSize } = state
-    return { pageNum, pageSize }
+  // 获取接口返回的数据数量
+  getCount(state) {
+    return state.Count
   },
   // 获取请求列表的参数
   getSportListParams(state) {
