@@ -2,7 +2,6 @@
 export default function({ app }) {
   const axios = app.$axios
   // 基本配置
-  // axios.defaults.baseURL = 'http://3.1.85.182:8080'
   axios.defaults.timeout = 10000
   axios.defaults.headers.post['Content-Type'] =
     'application/x-www-form-urlencoded'
