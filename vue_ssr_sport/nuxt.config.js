@@ -1,4 +1,5 @@
 const path = require('path')
+const colors = require('vuetify/es5/util/colors').default
 module.exports = {
   mode: 'spa',
   server: {
@@ -26,8 +27,9 @@ module.exports = {
   },
   /*
    ** Customize the progress-bar color
+   ** false is forbidden
    */
-  loading: { color: '#fff' },
+  loading:false,
   /*
    ** Global CSS
    */
@@ -48,6 +50,17 @@ module.exports = {
   axios: {
     baseURL: process.env.NODE_ENV == 'production'? "http://120.78.74.49:8080":"http://localhost:8080"
   },
+  vuetify: {
+    theme: {
+      primary: colors.blue.darken2,
+      accent: colors.grey.darken3,
+      secondary: colors.amber.darken3,
+      info: colors.teal.lighten1,
+      warning: colors.amber.base,
+      error: colors.deepOrange.accent4,
+      success: colors.green.accent3
+    }
+  },
   proxy: {
     '/api': {
       target: 'http://120.78.74.49:8080/api',
@@ -61,6 +74,7 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
+    '@nuxtjs/vuetify',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/proxy',

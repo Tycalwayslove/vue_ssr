@@ -154,7 +154,7 @@ export default {
         (this.pullDownRefresh &&
           this.pullDownRefresh.txt &&
           this.pullDownRefresh.txt.noMore) ||
-        '暂无更多数据'
+        ''
       return this.pullDownDirty ? moreTxt : noMoreTxt
     }
   },

@@ -38,16 +38,16 @@ export default {
   },
   data() {
     return {
-      show: true,
+      show: false,
       header: 'Better-scroll',
       pullUpLoad: {
         threshold: 10,
-        txt: { more: '正在加载以后的赛事中', noMore: '暂无更多数据' }
+        txt: { more: '正在加载以后的赛事中', noMore: '' }
       },
       pullDownRefresh: {
         threshold: 60,
         stop: 60,
-        txt: { more: '', noMore: '暂无更多数据' }
+        txt: { more: '', noMore: '' }
       },
       page: 0,
       list: {},
@@ -282,6 +282,6 @@ export default {
   position: relative;
 }
 .scroll-wrapper {
-  width: rem(375);
+  // width: rem(375);
 }
 </style>
