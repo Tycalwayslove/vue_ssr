@@ -7,7 +7,7 @@ module.exports = {
     port: 8080
   },
   /*
-   ** Headers of the page
+   ** Headers of the pagecv
    */
   head: {
     title: process.env.npm_package_name || '',
@@ -80,6 +80,7 @@ module.exports = {
     '@nuxtjs/proxy',
     '@nuxtjs/eslint-module',
     '@nuxtjs/style-resources' // with styleResources
+    
   ],
   /*
    ** Nuxt Style Resources (sass,less,stylus )

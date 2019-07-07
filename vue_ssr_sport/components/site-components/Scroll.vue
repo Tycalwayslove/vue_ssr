@@ -160,9 +160,7 @@ export default {
   },
   watch: {
     data: {
-      // setTimeout(() => {
-      //   this.forceUpdate(true)
-      // }, this.refreshDelay)
+
       deep: true,
       handler: function(newVal) {
         console.log('数据有变化')
