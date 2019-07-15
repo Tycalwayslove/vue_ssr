@@ -43,7 +43,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
-// import sportListItem from './sport-list-item'
+import moment from 'moment'
 
 export default {
   name: 'SportList',

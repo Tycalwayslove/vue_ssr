@@ -1,10 +1,10 @@
-const path = require('path')
-const colors = require('vuetify/es5/util/colors').default
+const path = require ('path');
+const colors = require ('vuetify/es5/util/colors').default;
 module.exports = {
   mode: 'spa',
   server: {
     host: 'localhost',
-    port: 8080
+    port: 8080,
   },
   /*
    ** Headers of the pagecv
@@ -12,24 +12,24 @@ module.exports = {
   head: {
     title: process.env.npm_package_name || '',
     meta: [
-      { charset: 'utf-8' },
+      {charset: 'utf-8'},
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1,user-scalable=no'
+        content: 'width=device-width, initial-scale=1,user-scalable=no',
       },
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+        content: process.env.npm_package_description || '',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}],
   },
   /*
    ** Customize the progress-bar color
    ** false is forbidden
    */
-  loading:false,
+  loading: false,
   /*
    ** Global CSS
    */
@@ -40,15 +40,17 @@ module.exports = {
   plugins: [
     {
       src: '~/plugins/axios',
-      ssr: false
-    }
+      ssr: false,
+    },
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: process.env.NODE_ENV == 'production'? "http://120.78.74.49:8080":"http://localhost:8080"
+    baseURL: process.env.NODE_ENV == 'production'
+      ? 'http://120.78.74.49:8080'
+      : 'http://localhost:8080',
   },
   vuetify: {
     theme: {
@@ -58,17 +60,17 @@ module.exports = {
       info: colors.teal.lighten1,
       warning: colors.amber.base,
       error: colors.deepOrange.accent4,
-      success: colors.green.accent3
-    }
+      success: colors.green.accent3,
+    },
   },
   proxy: {
     '/api': {
       target: 'http://120.78.74.49:8080/api',
       changeOrigin: true,
       pathRewrite: {
-        '^/api': ''
-      }
-    }
+        '^/api': '',
+      },
+    },
   },
   /*
    ** Nuxt.js modules
@@ -79,8 +81,7 @@ module.exports = {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     '@nuxtjs/eslint-module',
-    '@nuxtjs/style-resources' // with styleResources
-    
+    '@nuxtjs/style-resources', // with styleResources
   ],
   /*
    ** Nuxt Style Resources (sass,less,stylus )
@@ -90,9 +91,9 @@ module.exports = {
     // your settings here
     scss: [
       '@/assets/css/variable.scss',
-      '@/assets/css/utils.scss'
+      '@/assets/css/utils.scss',
       // use underscore "_" & also file extension ".scss"
-    ]
+    ],
   },
 
   /*
@@ -102,26 +103,26 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {
+    extend (config, ctx) {
       /*
        ** alias
        */
-      config.resolve.alias.components = path.resolve(__dirname, 'components')
+      config.resolve.alias.components = path.resolve (__dirname, 'components');
 
       /*
        **  Run ESLint on save
        */
       if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
+        config.module.rules.push ({
           enforce: 'pre',
           test: /\.(js|vue)$/,
           loader: 'eslint-loader',
           exclude: /(node_modules)/,
           options: {
-            fix: true
-          }
-        })
+            fix: true,
+          },
+        });
       }
-    }
-  }
-}
+    },
+  },
+};
